@@ -124,6 +124,10 @@ body {
     letter-spacing: 2px;
   }
 
+.display-none {
+  display: none;
+}
+
 .loading-movie {
   margin: 0 5px;
   background-color: #101010;
@@ -396,6 +400,7 @@ body {
   font-weight: bold;
   color: var(--lightgray);
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .moviepage-detail-content {

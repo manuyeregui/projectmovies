@@ -16,17 +16,11 @@ export default function Movie(props) {
   return (
     <motion.div className='person'>
       
-      <img src={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? avatar : props.personal_img} alt="Person"/>
+      <img loading='lazy' src={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? avatar : props.personal_img} /*alt="Person"*//>
 
       <div className={personName < 30 ? 'personal-details1' : 'personal-details2'}>
         <h4 ref={name}>{props.name}</h4>
-        {props.job ?
-          <div>
-            <p>{props.job}</p>
-          </div>
-          :
-          <p>{props.character}</p>
-        }
+        <p>{props.detail}</p>
       </div>
       
     </motion.div>

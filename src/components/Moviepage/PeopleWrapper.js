@@ -3,16 +3,14 @@ import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 import Person from './Person'
 
-function PeopleWrapper() {
-
-    const { id } = useParams();
+function PeopleWrapper(props) {
 
     const [cast, setCast] = useState([])
     const [crew, setCrew] = useState([])
 
     const getCredits = async () => {
 
-        let rawData = await fetch('https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1');
+        let rawData = await fetch(props.api);
         let data = await rawData.json();
 
         const castData = await data.cast/*.filter(d => ( d.popularity > 2))*/;
@@ -55,17 +53,17 @@ function PeopleWrapper() {
 
     return (
         <div>
-            <h2 className='moviepage-detail-title'>CAST</h2>
             <motion.div className='people-box' ref={castCarousel}>
+                <h2 className='moviepage-detail-title'>CAST</h2>
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -castCarouselWidth}}>
-                    {cast.map (m => <Person name={m.name} character={m.character} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
+                    {cast.map (m => <Person name={m.name} detail={m.character ? m.character : m.job} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
                 </motion.div>
             </motion.div>
-
-            <h2 className='moviepage-detail-title'>CREW</h2>
+            
             <motion.div className='people-box' ref={crewCarousel}>
+                <h2 className='moviepage-detail-title'>CREW</h2>
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -crewCarouselWidth}}>
-                    {crew.map (m => <Person name={m.name} job={m.job} department={m.department} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'crew' + m.job + m.id}/>)}
+                    {crew.map (m => <Person name={m.name} detail={m.character ? m.character : m.job} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'crew' + m.job + m.id}/>)}
                 </motion.div>
             </motion.div>
         </div>

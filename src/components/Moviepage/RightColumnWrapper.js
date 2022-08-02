@@ -1,8 +1,12 @@
 import React from 'react'
 import PeopleWrapper from './PeopleWrapper'
 import MoviesWrapper from '../MoviesCarousel/MoviesWrapper'
+import { useParams } from 'react-router-dom';
 
 function RightColumnWrapper(props) {
+
+    const { id } = useParams();
+
   return (
     <div className='moviepage-body-right-column'>
         <div className="moviepage-title-box">
@@ -35,7 +39,7 @@ function RightColumnWrapper(props) {
             </div>
         </div>
 
-        <PeopleWrapper/>
+        <PeopleWrapper api={'https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
 
         <MoviesWrapper title='RECOMMENDED MOVIES' api={props.recommendedMovies}/>
 
