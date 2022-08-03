@@ -45,7 +45,7 @@ body {
     color: var(--lightgray);
     letter-spacing: 2px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: bold;
     text-decoration: none;
   }
@@ -103,6 +103,104 @@ body {
         opacity: 1;
         position: relative;
       }*/
+
+
+.searchbar-inner-box {
+  background: #272727;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  justify-content: space-between;
+}
+
+  .input {
+    height: 30px;
+    width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-family: 'Cantarell', sans-serif;
+    color: var(--darkgray);
+    transition: all 0.5s;
+    transition-delay: ease-out 0.5s;
+  }
+
+    .searchbar-inner-box:hover>.input,
+    .input:focus {
+      width: 340px;
+      margin: 0 5px;
+    }
+
+  .searchbar-inner-box span {
+    color: var(--lightgray);
+    /*color: #101010;
+    font-weight: 600;*/
+    margin: 0 4px;
+    font-size: 22px;
+    cursor: default;
+  }
+
+  .searchbar-inner-box input::placeholder {
+    color: var(--darkgray);
+  }
+
+.results-box {
+  position: absolute;
+  z-index: 50;
+  border-radius: 5px;
+  overflow: hidden;
+  max-height: 405px;
+  transition: all 1s ease-out;
+}
+
+  .results-box a {
+    text-decoration: none;
+  }
+
+  .results-inner-box {
+    width: 390px;
+    height: 90px;
+    background: #272727;
+    padding: 5px;
+    border-top: 1px solid #181818;
+    display: flex;
+    align-items: center;
+    transition: 0.1s all ease-out;
+  }
+
+  .results-inner-box:hover {
+    background-color: #363636;
+  }
+
+  .results-inner-box img {
+    width: 60px;
+    border-radius: 4px;
+  }
+
+  .results-inner-box h4 {
+    color: var(--lightgray);
+    margin: 0 5px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 330px;
+  }
+
+  .results-inner-box p {
+    color: var(--darkgray);
+    margin: 0 5px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 330px;
+  }
+
 
 /*    Homepage    */
 

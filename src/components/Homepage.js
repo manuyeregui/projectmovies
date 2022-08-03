@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 
 function Homepage() {
 
-  console.log(process.env);
-
   return (
     <motion.div id="wrapper"
     initial={{ opacity: 0, x: 100 }}

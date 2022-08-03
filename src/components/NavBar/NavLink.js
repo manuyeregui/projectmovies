@@ -5,7 +5,6 @@ const NavLink = (props) => {
 
     const isLogged = useSelector((state) => state.user.isLogged)
     const globalState = useSelector((state) => state)
-    console.log(globalState);
 
     return (
         //<a href={props.link}>{isLogged ? 'Estas logueado' : props.text}</a>
