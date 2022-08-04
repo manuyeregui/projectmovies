@@ -13,7 +13,9 @@ function PeopleWrapper(props) {
         let rawData = await fetch(props.api);
         let data = await rawData.json();
 
-        const castData = await data.cast/*.filter(d => ( d.popularity > 2))*/;
+        const castData = await data.cast
+            .filter(d => ( d.character != ''));
+
         const crewData = await data.crew.filter(d =>
             d.department === 'Directing' ||
             d.department === 'Writing' ||
