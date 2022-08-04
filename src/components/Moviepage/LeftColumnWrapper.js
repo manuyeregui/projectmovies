@@ -3,7 +3,7 @@ import Tilt from 'react-vanilla-tilt';
 
 function LeftColumnWrapper(props) {
   return (
-    <div className='moviepage-body-left-column'>
+    <div className={props.backdrop ? 'moviepage-body-left-column' : 'moviepage-body-left-column-nobackdrop'}>
         <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
             <img className='moviepage-poster' src={"https://image.tmdb.org/t/p/original/" + props.poster_path} alt='movie poster'/>
         </Tilt>

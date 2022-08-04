@@ -56,14 +56,14 @@ function PeopleWrapper(props) {
             <motion.div className='people-box' ref={castCarousel}>
                 <h2 className='moviepage-detail-title'>CAST</h2>
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -castCarouselWidth}}>
-                    {cast.map (m => <Person name={m.name} detail={m.character ? m.character : m.job} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
+                    {cast.map (m => <Person id={m.id} name={m.name} detail={m.character ? m.character : m.job} actor={m.character ? true : false} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
                 </motion.div>
             </motion.div>
             
             <motion.div className='people-box' ref={crewCarousel}>
                 <h2 className='moviepage-detail-title'>CREW</h2>
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -crewCarouselWidth}}>
-                    {crew.map (m => <Person name={m.name} detail={m.character ? m.character : m.job} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'crew' + m.job + m.id}/>)}
+                    {crew.map (m => <Person id={m.id} name={m.name} detail={m.character ? m.character : m.job} actor={m.character ? true : false} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'crew' + m.job + m.id}/>)}
                 </motion.div>
             </motion.div>
         </div>

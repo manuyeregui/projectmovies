@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import PeopleWrapper from './PeopleWrapper'
 import LeftColumnWrapper from './LeftColumnWrapper';
 import RightColumnWrapper from './RightColumnWrapper';
-import MoviesWrapper from '../MoviesCarousel/MoviesWrapper';
 
 function Moviepage() {
 
@@ -49,6 +47,7 @@ function Moviepage() {
                     <div className='moviepage-body-box'>
 
                         <LeftColumnWrapper
+                            backdrop={movie.backdrop_path ? true : false}
                             tagline={movie.tagline}
                             poster_path={movie.poster_path}
                             vote_average={movie.vote_average}

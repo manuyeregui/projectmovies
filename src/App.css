@@ -123,14 +123,15 @@ body {
     outline: none;
     margin: 0;
     font-family: 'Cantarell', sans-serif;
+    font-size: 16px;
     color: var(--darkgray);
     transition: all 0.5s;
-    transition-delay: ease-out 0.5s;
+    transition-delay: 0.2s;
   }
 
     .searchbar-inner-box:hover>.input,
     .input:focus {
-      width: 340px;
+      width: 356px;
       margin: 0 5px;
     }
 
@@ -152,7 +153,7 @@ body {
   z-index: 50;
   border-radius: 5px;
   overflow: hidden;
-  max-height: 405px;
+  max-height: 606px;
   transition: all 1s ease-out;
 }
 
@@ -282,6 +283,7 @@ body {
       letter-spacing: 2px;
       text-decoration: none;
       color: #efefef;
+      padding: 0 20px;
       transition: all 0.05s ease-in;
     }
 
@@ -312,7 +314,7 @@ body {
       left: 0;
       right: 0;
       margin: 0 auto;
-      width: 140px;
+      width: 100%;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -320,6 +322,7 @@ body {
       justify-content: center;
       font-weight: bold;
       transition: all 0.1s ease-in;
+      cursor: grab;
     }
 
       .movie:hover>.hidden-text-box {
@@ -332,6 +335,7 @@ body {
       color: var(--lightgray);;
       display: flex;
       align-items: center;
+      margin: 0;
     }
 
     .movie-rating span {
@@ -403,7 +407,19 @@ body {
   height: 100%;
 }
 
-.moviepage-body-left-column h3{
+.moviepage-body-left-column-nobackdrop {
+  min-width: 260px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 15px;
+  top: 15px;
+  height: 100%;
+}
+
+.moviepage-body-left-column h3,
+.moviepage-body-left-column-nobackdrop h3{
   font-size: 22px;
   display: flex;
   align-items: center;
@@ -412,7 +428,8 @@ body {
   margin-bottom: 0;
 }
 
-.moviepage-body-left-column p{
+.moviepage-body-left-column p,
+.moviepage-body-left-column-nobackdrop p{
   color: #7a7a7a;
   font-size: 14px;
   margin-top: 0;
@@ -448,20 +465,21 @@ body {
 .moviepage-title-box {
   display: flex;
   align-items: baseline;
+  margin: 20px 0;
 }
 
 .moviepage-title {
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 0 10px 20px 0;
+  margin: 0 10px 0 0;
 }
 
 .moviepage-metadata {
   font-weight: 100;
   font-style: italic;
   color: var(--darkgray);
-  margin-right: 10px;
-  min-width: 102px;
+  margin: 0 5px;
+  min-width: 45px;
 }
 
 .moviepage-tagline {
@@ -562,11 +580,18 @@ body {
     bottom: 188px;
   }
 
-  .personal-details1 h4,
-  .personal-details2 h4 {
+  .personal-details1 a,
+  .personal-details2 a {
     margin: 0;
     color: var(--darkgray);
+    text-decoration: none;
+    transition: 0.1s all
   }
+
+    .personal-details1 a:hover,
+    .personal-details2 a:hover {
+      color: #777;
+    }
 
   .personal-details1 p,
   .personal-details2 p {
@@ -614,3 +639,123 @@ body {
 .footer-box a:hover {
   color: #555;
 }
+
+/*      Personpage      */
+
+.personpage-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.personal-data-box {
+  display: flex;
+  margin: 15px 0;
+}
+
+  .personal-data-box img {
+    width: 300px;
+    border-radius: 10px;
+  }
+
+  .personpage-right-column {
+    margin-left: 20px;
+    width: 100%;
+  }
+
+
+
+  .personpage-left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    width: 300px;
+  }
+
+  .personpage-left-column h2 {
+    color: var(--lightgray);
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+    
+  }
+
+  .personpage-left-column h3 {
+    margin: 0 0 20px 0;
+    color: var(--darkgray);
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    font-style: italic;
+    text-transform: lowercase;
+  }
+
+  .personpage-left-column p {
+    color: #777;
+    font-style: italic;
+    margin: 0;
+  }
+
+.job-titles {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+  .job-not-selected {
+    color: #555;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.05s;
+    margin: 0 10px;
+  }
+
+    .job-not-selected:hover{
+      color: var(--darkgray);
+    }
+
+  .job-selected {
+    color: var(--lightgray);
+    text-decoration: none;
+    font-weight: 600;
+    pointer-events: none;
+    margin: 0 5px;
+  }
+
+.movies-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .movies-grid img {
+    width: 160px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: all 0.1s;
+  }
+
+  .null-poster-movie {
+    width: 180px;
+    height: 270px;
+    border-radius: 5px;
+    margin: 5px;
+    background: #363636;
+    color: var(--darkgray);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+    /*.movies-grid img:hover,
+    .null-poster-movie:hover {
+      transform: scale(1.02);
+    }*/

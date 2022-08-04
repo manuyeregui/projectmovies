@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function Movie(props) {
 
@@ -10,7 +11,6 @@ export default function Movie(props) {
 
   useEffect(() => {
     setPersonName(name.current.clientHeight)
-    
   }, [])
 
   return (
@@ -19,7 +19,7 @@ export default function Movie(props) {
       <img loading='lazy' src={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? avatar : props.personal_img} /*alt="Person"*//>
 
       <div className={personName < 30 ? 'personal-details1' : 'personal-details2'}>
-        <h4 ref={name}>{props.name}</h4>
+        <Link ref={name} to={props.actor === true ? ('/person/' + props.id + '/actor') : '/person/' + props.id + '/' + props.detail.toLowerCase().split(' ').join('')}>{props.name}</Link>
         <p>{props.detail}</p>
       </div>
       
