@@ -4,9 +4,13 @@ import Tilt from 'react-vanilla-tilt';
 function LeftColumnWrapper(props) {
   return (
     <div className={props.backdrop ? 'moviepage-body-left-column' : 'moviepage-body-left-column-nobackdrop'}>
-        <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
-            <img className='moviepage-poster' src={"https://image.tmdb.org/t/p/original/" + props.poster_path} alt='movie poster'/>
-        </Tilt>
+        { props.poster_path !== null ?
+          <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
+              <img className='moviepage-poster' src={"https://image.tmdb.org/t/p/original/" + props.poster_path} alt='movie poster'/>
+          </Tilt>
+          :
+          null
+        }
         {props.tagline ? <h2 className='moviepage-tagline'>{props.tagline}</h2> : null}
         
         <h3 className={

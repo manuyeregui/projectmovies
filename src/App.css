@@ -29,6 +29,7 @@ body {
   background-color: #101010;
   height: 60px;
   margin: 0 auto;
+  position: relative;
 }
 
   .nav-content {
@@ -126,7 +127,7 @@ body {
     font-size: 16px;
     color: var(--darkgray);
     transition: all 0.5s;
-    transition-delay: 0.2s;
+    transition-delay: 0.5s;
   }
 
     .searchbar-inner-box:hover>.input,
@@ -674,29 +675,29 @@ body {
     width: 300px;
   }
 
-  .personpage-left-column h2 {
-    color: var(--lightgray);
-    letter-spacing: 2px;
-    margin: 0;
-    text-transform: uppercase;
-    
-  }
+    .personpage-left-column h2 {
+      color: var(--lightgray);
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+      
+    }
 
-  .personpage-left-column h3 {
-    margin: 0 0 20px 0;
-    color: var(--darkgray);
-    letter-spacing: 2px;
-    font-size: 16px;
-    font-weight: 100;
-    font-style: italic;
-    text-transform: lowercase;
-  }
+    .personpage-left-column h3 {
+      margin: 0 0 20px 0;
+      color: var(--darkgray);
+      letter-spacing: 2px;
+      font-size: 16px;
+      font-weight: 100;
+      font-style: italic;
+      text-transform: lowercase;
+    }
 
-  .personpage-left-column p {
-    color: #777;
-    font-style: italic;
-    margin: 0;
-  }
+    .personpage-left-column p {
+      color: #777;
+      font-style: italic;
+      margin: 0 0 20px 0;
+    }
 
 .job-titles {
   width: 100%;
@@ -739,8 +740,8 @@ body {
   }
 
   .null-poster-movie {
-    width: 180px;
-    height: 270px;
+    width: 160px;
+    height: 240px;
     border-radius: 5px;
     margin: 5px;
     background: #363636;
@@ -753,6 +754,17 @@ body {
     text-transform: uppercase;
     font-weight: 600;
     transition: all 0.2s;
+  }
+
+  .read-more-button {
+    color: var(--darkgray);
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.05s all;
+  }
+
+  .read-more-button:hover {
+    color: #777
   }
 
     /*.movies-grid img:hover,

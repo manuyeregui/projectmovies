@@ -2,12 +2,13 @@ import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PersonMovies from './PersonMovies';
+import ReadMore from './ReadMore'
 import Tilt from 'react-vanilla-tilt';
 
 function Personpage() {
 
     const { id } = useParams();
-
+    
     const [personData, setPersonData] = useState([]);
     const [loadingPersonData, setLoadingPersonData] = useState(true)
 
@@ -44,8 +45,11 @@ function Personpage() {
                 <div className='personal-data-box'>
                     <div className='personpage-left-column'>
                         <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
-                            <img loading='lazy' src={'https://image.tmdb.org/t/p/original/' + personData.profile_path} alt=''/>
+                            {<img loading='lazy' src={'https://image.tmdb.org/t/p/original/' + personData.profile_path} alt=''/>}
                         </Tilt>
+
+                        <h2>{personData.name}</h2>
+                        <h3>{personData.known_for_department}</h3>
 
                         {personData.birthday !== null ?
                             (
@@ -60,9 +64,13 @@ function Personpage() {
                         : null
                         }
 
-                        <h2>{personData.name}</h2>
-                        <h3>{personData.known_for_department}</h3>
-                        <p>{personData.biography}</p>
+                        {
+                        (personData.biography !== undefined && personData.biography !== '')
+                            ?
+                            <ReadMore limit={300} text={personData.biography}/>
+                            :
+                            null
+                        }
 
                     </div>
                     <div className='personpage-right-column'>
