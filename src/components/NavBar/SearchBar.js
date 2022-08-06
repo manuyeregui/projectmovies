@@ -16,19 +16,18 @@ function SearchBar() {
   
       let peopleRawData = await fetch('https://api.themoviedb.org/3/search/person?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&query=' + inputState + '&page=1&include_adult=false');
       let peopleData = await peopleRawData.json();
-  
-      /*moviesData.results.forEach(e => searchData.push(e));
-      peopleData.results.forEach(e => searchData.push(e));*/
       
-      moviesData.results.forEach(e => searchData.length <= 10 ? searchData.push(e) : null);
-      peopleData.results.forEach(e => searchData.length <= 10 ? searchData.push(e) : null);
+      moviesData.results.forEach(e => searchData.length <= 10 && searchData.push(e));
+      peopleData.results.forEach(e => searchData.length <= 15 && searchData.push(e));
   
       searchData = searchData
-        .filter(f => f.popularity > 3)
+        .filter(f => f.popularity > 2)
         .sort((a, b) => b.popularity - a.popularity)
   
       setData(searchData);
     }
+
+    
   
     useEffect(() => {
       if (inputState != (null || '')) {
@@ -43,6 +42,7 @@ function SearchBar() {
     const focusOut = (e) => {
       setTimeout(() => {
         setInputState(e.target.value = '');
+        setData([])
       }, 100);
     }
 
@@ -53,38 +53,52 @@ function SearchBar() {
                     <span className="material-symbols-rounded">search</span>
                 </div>
 
-                <div className={inputState !== '' ? 'results-box' : 'display-none'}>
+                <div className={(inputState !== '' && inputState !== null) ? 'results-box' : 'display-none'}>
 
-                    {data !== undefined ?
+                    {data !== undefined &&
                     data.map(m => 
 
-                            <Link to={m.title !== undefined ? ('/movies/' + m.id) : '/person/' + m.id + '/' + m.known_for_department.toLowerCase().split('ing').join('') + 'or'} key={m.id}>
-                            <div className='results-inner-box'>
-                                <img alt='' src={m.profile_path !== undefined ? ("https://image.tmdb.org/t/p/original/" + m.profile_path) : ("https://image.tmdb.org/t/p/original/" + m.poster_path)}/>
-                                <div>
-                                <h4>{m.name !== undefined ? m.name : m.title}</h4>
-                                <p>{m.known_for_department !== undefined ? m.known_for_department : m.release_date.substring(0, 4)}</p>
-                                {m.known_for !== undefined ?
-
-                                    <p>
-                                    {m.known_for
-                                    .filter(mov => mov.title !== undefined)
-                                    .map(mov => (m.known_for.filter(mov => mov.title !== undefined).indexOf(mov) + 1) === m.known_for.filter(mov => mov.title !== undefined).length ? mov.title : mov.title + ', ')}
-                                    </p>
-                                    : 
-                                    (m.vote_average > 0 ?
-                                    <p className='movie-rating'><span className='material-symbols-rounded'>star</span>{m.vote_average}</p>
-                                    :
-                                    null
-                                    )
+                      <Link to={m.title !== undefined ? ('/movies/' + m.id) : '/person/' + m.id + '/all'} key={m.id}>
+                        <div className='results-inner-box'>
+                          
+                            <img 
+                              alt='' 
+                              src={
+                                    m.profile_path !== undefined
+                                      ? (m.profile_path !== null && ("https://image.tmdb.org/t/p/original" + m.profile_path))
+                                      : (m.poster_path !== null && ("https://image.tmdb.org/t/p/original" + m.poster_path))
+                                  }
+                            />
+                          
+                            <div>
+                              <h4>{m.name !== undefined ? m.name : m.title}</h4>
+                              <p>
+                                {
+                                  m.known_for_department !== undefined
+                                    ? m.known_for_department
+                                    : (m.release_date && m.release_date.substring(0, 4))
                                 }
-                                </div>
-                            </div>
-                            </Link>
-                        
-                        )
+                              </p>
+                              
+                              {m.known_for !== undefined ?
 
-                    : null}
+                                  <p>
+                                    {m.known_for
+                                      .filter(mov => mov.title !== undefined)
+                                      .map(mov => (m.known_for.filter(mov => mov.title !== undefined).indexOf(mov) + 1) === m.known_for.filter(mov => mov.title !== undefined).length ? mov.title : mov.title + ', ')}
+                                  </p>
+
+                                  :
+
+                                  (m.vote_average > 0 &&
+                                    <p className='movie-rating'><span className='material-symbols-rounded'>star</span>{m.vote_average}</p>)
+                              }
+                              
+                            </div>
+                        </div>
+                      </Link>
+                        
+                    )}
                     
                 </div>
                 </div>

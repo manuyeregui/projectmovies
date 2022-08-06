@@ -47,16 +47,10 @@ function PeopleWrapper(props) {
     const [crewCarouselWidth, setCrewCarouselWidth] = useState(null);
     const crewCarousel = useRef();
 
-    /*useEffect(() => {
-
-        setCrewCarouselWidth(crewCarousel.current.scrollWidth - crewCarousel.current.offsetWidth + 10)
-
-    }, [crew])*/
-
     return (
         <div>
             <motion.div className='people-box' ref={castCarousel}>
-                <h2 className='moviepage-detail-title'>CAST</h2>
+                {cast.length != 0 ?<h2 className='moviepage-detail-title'>CAST</h2> : <h2 className='moviepage-detail-title'>No Cast data yet...</h2>}
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -castCarouselWidth}}>
                     {cast.map (m => <Person id={m.id} name={m.name} detail={m.character ? m.character : m.job} actor={m.character ? true : false} personal_img={"https://image.tmdb.org/t/p/original/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
                 </motion.div>

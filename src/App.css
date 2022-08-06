@@ -127,7 +127,7 @@ body {
     font-size: 16px;
     color: var(--darkgray);
     transition: all 0.5s;
-    transition-delay: 0.5s;
+    transition-delay: 0.1s;
   }
 
     .searchbar-inner-box:hover>.input,
@@ -367,14 +367,7 @@ body {
   background: #555;
 }
 
-/*      animations      */
 
-@keyframes loading{
-  0%{background-color: #101010;}
-  50%{background-color: #131313;}
-  100%{background-color: #101010;}
-  /*100%{transform:translateX(150%)}*/
-}
 
 /*        Moviepage       */
 
@@ -448,6 +441,37 @@ body {
 .bad-rating {
   color: rgb(131, 0, 0);
 }
+
+.providers-box {
+  background-color: #363636;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+  .justwatch-logo {
+    width: 75px;
+    filter: brightness(100);
+    opacity: 0.5;
+  }
+  
+  .providers-img-box {
+    flex-wrap: wrap;
+    max-width: 225px;
+    border-top: 1px solid #555;
+    display: flex;
+    margin-top: 5px;
+    padding-top: 5px;
+    color: #777;
+  }
+
+    .providers-img-box img {
+      width: 35px;
+      margin: 5px;
+      border-radius: 10px;
+    }
 
 .moviepage-body-right-column {
   padding-left: 15px;
@@ -565,6 +589,7 @@ body {
   height: 100%;
   padding: 5px;
   transition: 0.2s all ease-out;
+  max-width: 140px;
 }
 
 .personal-details2 {
@@ -574,6 +599,7 @@ body {
   height: 100%;
   padding: 5px;
   transition: 0.2s all ease-out;
+  max-width: 140px;
 }
 
   .person:hover>.personal-details1,
@@ -583,14 +609,20 @@ body {
 
   .personal-details1 a,
   .personal-details2 a {
-    margin: 0;
-    color: var(--darkgray);
     text-decoration: none;
-    transition: 0.1s all
   }
 
-    .personal-details1 a:hover,
-    .personal-details2 a:hover {
+  .personal-details1 h6,
+  .personal-details2 h6 {
+    margin: 0;
+    color: var(--darkgray);
+    transition: 0.1s all;
+    font-size: 16px;
+
+  }
+
+    .personal-details1 h6:hover,
+    .personal-details2 h6:hover {
       color: #777;
     }
 
@@ -704,7 +736,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #555;
 }
 
   .job-not-selected {
@@ -713,6 +746,10 @@ body {
     font-weight: 600;
     transition: all 0.05s;
     margin: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
   }
 
     .job-not-selected:hover{
@@ -725,6 +762,23 @@ body {
     font-weight: 600;
     pointer-events: none;
     margin: 0 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+  }
+
+  .all-not-selected {
+    color: #171717;
+    background-color: #555;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .all-selected {
+    background-color: #555;
+    border-radius: 5px;
+    padding: 5px;
   }
 
 .movies-grid {
@@ -733,6 +787,7 @@ body {
 }
 
   .movies-grid img {
+    position: relative;
     width: 160px;
     border-radius: 5px;
     margin: 5px;
@@ -767,7 +822,65 @@ body {
     color: #777
   }
 
+  .pages {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+  }
+
+  .pages div {
+    display: flex;
+    border-radius: 5px;
+    background-color: #272727;
+  }
+  
+  .switchpage-active {
+    color: #a8a8a8;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .switchpage-inactive {
+    color: #555;
+    font-weight: 600;
+    cursor: default;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+    .pagenumber-active {
+      color: #555;
+      margin: 16px 10px;
+    }
+
+    .pagenumber-inactive {
+      color: #a8a8a8;
+      margin: 16px 10px;
+    }
+
     /*.movies-grid img:hover,
     .null-poster-movie:hover {
       transform: scale(1.02);
     }*/
+
+/*      animations      */
+
+@keyframes loading{
+  0%{background-color: #101010;}
+  50%{background-color: #131313;}
+  100%{background-color: #101010;}
+  /*100%{transform:translateX(150%)}*/
+}
+
+@-webkit-keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }  
+}
+   
+@keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }  
+}

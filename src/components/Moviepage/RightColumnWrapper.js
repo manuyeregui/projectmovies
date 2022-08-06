@@ -12,7 +12,7 @@ function RightColumnWrapper(props) {
         <div className="moviepage-title-box">
             <h2 className='moviepage-title'>{props.title}</h2>
             <p className='moviepage-metadata'>{props.release_date.substring(0, 4)}</p>
-            <p className='moviepage-metadata'>{props.runtime}min</p>
+            {(props.runtime !== 0) && <p className='moviepage-metadata'>{props.runtime}min</p>}
         </div>
 
         <div className='moviepage-overview'>{props.overview}</div>

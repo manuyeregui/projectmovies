@@ -18,7 +18,7 @@ function ReadMore(props) {
         text.length >= (props.limit + 50) ?
         <p>
             {isTruncated ? resultString + '...' : resultString}
-            {<span className='read-more-button' onClick={toggleIsTruncated}> {isTruncated ? ' more' : ' less'} </span>}
+            <span className='read-more-button' onClick={toggleIsTruncated}> {isTruncated ? ' more' : ' less'} </span>
         </p>
         :
         <p>

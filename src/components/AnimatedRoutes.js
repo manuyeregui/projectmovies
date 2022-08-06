@@ -3,8 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Homepage from './Homepage';
 import Errorpage from './Errorpage';
 import Moviepage from './Moviepage/Moviepage';
-import Personpage from './Personpage';
-import PersonMovies from './PersonMovies';
+import Personpage from './Personpage/Personpage';
 
 import { AnimatePresence } from 'framer-motion';
 
