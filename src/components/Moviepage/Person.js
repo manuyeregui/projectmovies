@@ -13,9 +13,6 @@ export default function Movie(props) {
     setPersonName(name.current.clientHeight)
   }, [])
 
-  console.log(name);
-  console.log(personName);
-
   return (
     <motion.div className='person'>
       

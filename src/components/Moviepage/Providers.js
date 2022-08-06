@@ -15,7 +15,7 @@ function Providers() {
     let providersRawData = await fetch('https://api.themoviedb.org/3/movie/' + id + '/watch/providers?api_key=' + process.env.REACT_APP_TMDB_KEY);
     let providersData = await providersRawData.json();
 
-    const localProviders = []
+    let localProviders = []
 
     if (providersData.results.AR !== undefined) {
       localProviders = providersData.results.AR
@@ -39,7 +39,7 @@ function Providers() {
       <a href='https://www.justwatch.com/' target='_blank' rel="noreferrer"><img src={logo} alt='' className='justwatch-logo'/></a>
       <div className='providers-img-box'>
         {services.length !== 0
-          ? services.map(s => <img src={'https://image.tmdb.org/t/p/original/' + s} alt='' key={s.provider_id}/>)
+          ? services.map(s => <img src={'https://image.tmdb.org/t/p/original/' + s} alt='' key={s}/>)
           : 'No providers yet'
         }
       </div>

@@ -112,27 +112,25 @@ function PersonMovies(props) {
             
             <div className='pages'>
                 {activePage > 0 ? <p onClick={PreviousPage} className='switchpage-active'>Back</p> : <p className='switchpage-inactive'>Back</p>}
-                <div>{pagesArray.map(p => p === activePage ? <p className='pagenumber-inactive'>{p + 1}</p> :<p className='pagenumber-active'>{p + 1}</p>)}</div>
+                <div>{pagesArray.map(p => p === activePage ? <p className='pagenumber-inactive' key={p}>{p + 1}</p> :<p className='pagenumber-active' key={p}>{p + 1}</p>)}</div>
                 {activePage < (pages - 1) ? <p onClick={NextPage} className='switchpage-active'>Next</p> : <p className='switchpage-inactive'>Next</p>}
             </div>
 
             <div className='movies-grid'>
                 {Pagination(moviesFilter, 16, activePage)
                     .map(movie => 
-                        <Link to={'/movies/' + movie.id} key={'movie' + movie.id}>
+                        <Link to={'/movies/' + movie.id} key={movie.id}>
+                            <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
                             {
                                 movie.poster_path != null
                                 ?
-                                <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
                                     <motion.img 
                                         initial={{ opacity: 0, x: 100 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }} 
                                         key={movie.id}
                                         src={'https://image.tmdb.org/t/p/original' + movie.poster_path}/>
-                                </Tilt>
                                 :
-                                <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
                                     <motion.div
                                         initial={{ opacity: 0, x: 100 }}
                                         animate={{ opacity: 1, x: 0 }}
@@ -141,8 +139,9 @@ function PersonMovies(props) {
                                     >
                                         {movie.title}
                                     </motion.div>
-                                </Tilt>
+                                
                             }
+                            </Tilt>
                         </Link>
                 )}
 
