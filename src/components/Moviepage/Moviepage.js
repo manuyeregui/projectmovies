@@ -27,6 +27,15 @@ function Moviepage() {
 
     const recommendedMovies = 'https://api.themoviedb.org/3/movie/' + id + '/recommendations?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'
 
+
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const changeLoading = () => {
+        setIsLoading(false)
+    }
+
+
     return (
         <motion.div className='moviepage'
         initial={{ opacity: 0, x: 100}}
@@ -34,40 +43,46 @@ function Moviepage() {
         exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
         >
 
-            {loadingMovie === true ?
-                
-                <div>loading...</div>
-                
-                :
-                
-                <div>
-                    
-                    <img className='backdrop-img' src={"https://image.tmdb.org/t/p/original/" + movie.backdrop_path} alt='backdrop'/>
-                    
-                    <div className='moviepage-body-box'>
-
-                        <LeftColumnWrapper
-                            backdrop={movie.backdrop_path ? true : false}
-                            tagline={movie.tagline}
-                            poster_path={movie.poster_path}
-                            vote_average={movie.vote_average}
-                            vote_count={movie.vote_count}
+        {loadingMovie === false &&
+        
+            <div>
+                        
+                        {/*<img className='backdrop-img' src={"https://image.tmdb.org/t/p/original/" + movie.backdrop_path} alt='backdrop'/>*/}
+                        <img
+                            onLoad={changeLoading}
+                            src={isLoading ? "https://image.tmdb.org/t/p/w300/" + movie.backdrop_path : "https://image.tmdb.org/t/p/original/" + movie.backdrop_path}
+                            className={isLoading ? 'backdrop-img loading-blur' : 'backdrop-img'}
+                            alt="Movie Poster"
                         />
+                        
+                        <div className='moviepage-body-box'>
 
-                        <RightColumnWrapper
-                            title={movie.title}
-                            release_date={movie.release_date}
-                            runtime={movie.runtime}
-                            overview={movie.overview}
-                            genres={movie.genres}
-                            production_companies={movie.production_companies}
-                            production_countries={movie.production_countries}
-                            spoken_languages={movie.spoken_languages}
-                            recommendedMovies={recommendedMovies}
-                        />
-                    </div>
-                    
-                </div>}
+                            <LeftColumnWrapper
+                                backdrop={movie.backdrop_path ? true : false}
+                                tagline={movie.tagline}
+                                poster_path={movie.poster_path}
+                                vote_average={movie.vote_average}
+                                vote_count={movie.vote_count}
+                            />
+
+                            <RightColumnWrapper
+                                title={movie.title}
+                                release_date={movie.release_date}
+                                runtime={movie.runtime}
+                                overview={movie.overview}
+                                genres={movie.genres}
+                                production_companies={movie.production_companies}
+                                production_countries={movie.production_countries}
+                                spoken_languages={movie.spoken_languages}
+                                recommendedMovies={recommendedMovies}
+                            />
+                        </div>
+                        
+                </div>
+
+        }
+
+            
 
         </motion.div>
     )

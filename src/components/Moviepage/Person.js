@@ -13,7 +13,7 @@ export default function Movie(props) {
   }, [])
 
   return (
-    <motion.div className='person' style={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? {backgroundImage: `url(${avatar})`} : {backgroundImage: `url(${props.personal_img})`}}>
+    <motion.div className='person' style={props.personal_img === 'https://image.tmdb.org/t/p/w185/null' ? {backgroundImage: `url(${avatar})`} : {backgroundImage: `url(${props.personal_img})`}}>
 
       <div className={personName < 30 ? 'personal-details1' : 'personal-details2'}>
         <Link to={props.actor === true ? ('/person/' + props.id + '/actor') : '/person/' + props.id + '/' + props.detail.toLowerCase().split(' ').join('')}><h6 ref={name}>{props.name}</h6></Link>

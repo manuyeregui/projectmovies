@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Movie from './Movie';
+import Movie from './MovieInCarousel';
 
 function MoviesWrapper(props) {
 
@@ -51,7 +51,16 @@ function MoviesWrapper(props) {
           
             loadingMovies.map (l => <div className='loading-movie' key={'loadingMovie' + l}/>) :
             
-            movies.map (m => <Movie poster={"https://image.tmdb.org/t/p/original/" + m.poster_path} title={m.title} rating={m.vote_average} id={m.id} key={'carouselMovie' + m.id}/>)}
+            movies.map (m =>
+              <Movie
+                poster_path={m.poster_path}
+                title={m.title}
+                rating={m.vote_average}
+                id={m.id}
+                key={'carouselMovie' + m.id}
+                showRating= {props.showRating}
+              />
+            )}
           
         </motion.div>
       </motion.div>

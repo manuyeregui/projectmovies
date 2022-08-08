@@ -51,7 +51,7 @@ function RightColumnWrapper(props) {
 
         <PeopleWrapper api={'https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
 
-        <MoviesWrapper title='RECOMMENDED MOVIES' api={props.recommendedMovies}/>
+        <MoviesWrapper title='RECOMMENDED MOVIES' api={props.recommendedMovies} showRating={true}/>
 
     </div>
   )

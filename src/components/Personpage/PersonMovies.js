@@ -1,9 +1,8 @@
 import { React, useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom';
-import Tilt from 'react-vanilla-tilt';
-import { motion } from 'framer-motion';
+import MovieInGrid from './MovieInGrid';
 
-function PersonMovies(props) {
+function PersonMovies() {
 
     const [personMovies, setPersonMovies] = useState([]);
     const [personJobs, setPersonJobs] = useState([]);
@@ -119,30 +118,7 @@ function PersonMovies(props) {
             <div className='movies-grid'>
                 {Pagination(moviesFilter, 16, activePage)
                     .map(movie => 
-                        <Link to={'/movies/' + movie.id} key={movie.id}>
-                            <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
-                            {
-                                movie.poster_path != null
-                                ?
-                                    <motion.img 
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }} 
-                                        key={movie.id}
-                                        src={'https://image.tmdb.org/t/p/original' + movie.poster_path}/>
-                                :
-                                    <motion.div
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
-                                        className='null-poster-movie'
-                                    >
-                                        {movie.title}
-                                    </motion.div>
-                                
-                            }
-                            </Tilt>
-                        </Link>
+                        <MovieInGrid id={movie.id} poster_path={movie.poster_path} title={movie.title}/>
                 )}
 
             </div>
