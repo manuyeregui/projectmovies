@@ -1,10 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import avatar from '../../assets/default-avatar.jpg'
 
 export default function Movie(props) {
-
-  const avatar = 'https://st4.depositphotos.com/29453910/37778/v/450/depositphotos_377785390-stock-illustration-hand-drawn-modern-man-avatar.jpg'
 
   const [personName, setPersonName] = useState(0);
   const name = useRef();
@@ -14,9 +13,7 @@ export default function Movie(props) {
   }, [])
 
   return (
-    <motion.div className='person'>
-      
-      <img loading='lazy' src={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? avatar : props.personal_img} /*alt="Person"*//>
+    <motion.div className='person' style={props.personal_img === 'https://image.tmdb.org/t/p/original/null' ? {backgroundImage: `url(${avatar})`} : {backgroundImage: `url(${props.personal_img})`}}>
 
       <div className={personName < 30 ? 'personal-details1' : 'personal-details2'}>
         <Link to={props.actor === true ? ('/person/' + props.id + '/actor') : '/person/' + props.id + '/' + props.detail.toLowerCase().split(' ').join('')}><h6 ref={name}>{props.name}</h6></Link>

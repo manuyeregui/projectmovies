@@ -7,8 +7,11 @@ export default function Movie(props) {
     <motion.div className='movie'>
         <img loading='lazy' src={props.poster} className='poster-img' alt="Movie Poster"/>
         <div className='hidden-text-box'>
-          <Link className="movie-title" to={'/movies/' + props.id}>{props.title}</Link>
-          {props.rating !== 0 ? <div className='movie-rating'><span className="material-symbols-rounded">star</span>{props.rating}</div> : null}
+          <div>
+            <h2 className="movie-title">{props.title}</h2>
+            {props.rating !== 0 ? <div className='movie-rating'><span className="material-symbols-rounded">star</span>{props.rating.toFixed(1)}</div> : null}
+          </div>
+          <Link className="movie-button" to={'/movies/' + props.id}>DETAILS</Link>
         </div>
     </motion.div>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import PeopleWrapper from './PeopleWrapper'
 import MoviesWrapper from '../MoviesCarousel/MoviesWrapper'
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function RightColumnWrapper(props) {
 
@@ -10,8 +11,17 @@ function RightColumnWrapper(props) {
   return (
     <div className='moviepage-body-right-column'>
         <div className="moviepage-title-box">
-            <h2 className='moviepage-title'>{props.title}</h2>
+            <motion.h2 
+                initial={{ opacity: 0, x: 200 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x:-200, transition: {duration: 0.2} }} 
+                className='moviepage-title'
+            >
+                {props.title}
+            </motion.h2>
+
             <p className='moviepage-metadata'>{props.release_date.substring(0, 4)}</p>
+
             {(props.runtime !== 0) && <p className='moviepage-metadata'>{props.runtime}min</p>}
         </div>
 

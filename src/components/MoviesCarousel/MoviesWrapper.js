@@ -35,7 +35,15 @@ function MoviesWrapper(props) {
 
   return (
     <div className={(loading === false && movies.length != 0) ? 'section-wrapper' : 'display-none'}>
-      <h2>{props.title}</h2>
+
+      <motion.h2 
+        initial={{ opacity: 0, x: 200 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x:-200, transition: {duration: 0.2} }} 
+      >
+        {props.title}
+      </motion.h2>
+
       <motion.div className='movies-box' ref={carousel}>
         <motion.div className='inner-movies-box' drag="x" dragConstraints={{right: 0, left: -carouselWidth}}>
 

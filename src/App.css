@@ -201,6 +201,7 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 330px;
+    justify-content: flex-start;
   }
 
 
@@ -209,6 +210,17 @@ body {
 #wrapper {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.background-carousel-box {
+  position: relative;
+  width: 100%;
+  z-index: -1;
+  display: flex;
+}
+
+.background-carousel-box img {
+ width: 100%;
 }
 
 .section-wrapper {
@@ -254,6 +266,8 @@ body {
     margin: 0 5px;
     position: relative;
     transition: all 0.1s ease-in;
+    display: flex;
+    align-items: center;
   }
 
     .movie:hover {
@@ -286,25 +300,48 @@ body {
       color: #efefef;
       padding: 0 20px;
       transition: all 0.05s ease-in;
+      font-size: 16px;
     }
 
-      .movie-title:hover {
-        color: #afafaf;
+    .movie-button {
+      border: 2px solid var(--lightgray);
+      background-color: rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      padding: 6px;
+      border-radius: 4px;
+      color: var(--lightgray);
+      position: relative;
+      z-index: 1;
+      transition: 0.5s all ease;
+      position: absolute;
+      bottom: 25px;
+      
+    }
+    
+      .movie-button:hover {
+        color: #171717;
+
       }
 
-    /*.movie-rating {
-      background: var(--lightgray);;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding-right: 4px;
-      text-align: center;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      transition: all 0.1s ease-in;
-    }*/
+      .movie-button:before {
+        transition: 0.2s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        opacity: 0;
+        content: "";
+        background-color: var(--lightgray);
+        
+      }
+
+      .movie-button:hover::before {
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: -1;
+      }
 
     .hidden-text-box {
       opacity: 0;
@@ -316,6 +353,7 @@ body {
       right: 0;
       margin: 0 auto;
       width: 100%;
+      padding: 40px 0;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -324,11 +362,16 @@ body {
       font-weight: bold;
       transition: all 0.1s ease-in;
       cursor: grab;
+      
     }
 
       .movie:hover>.hidden-text-box {
         /*background: var(--aqua);*/
         opacity: 100;
+      }
+
+      .hidden-text-box:active {
+        cursor: grabbing;
       }
 
 
@@ -337,6 +380,7 @@ body {
       display: flex;
       align-items: center;
       margin: 0;
+      justify-content: center;
     }
 
     .movie-rating span {
@@ -470,7 +514,7 @@ body {
     .providers-img-box img {
       width: 35px;
       margin: 5px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
 .moviepage-body-right-column {
@@ -568,10 +612,19 @@ body {
   margin: 0 5px;
   border-radius: 5px;
   min-width: 150px;
-  overflow: hidden;
+  height: 225px;
+  overflow-y: hidden;
   max-height: 250px;
   transition: 0.1s all ease-out;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: grab;
 }
+
+.person:active {
+  cursor: grabbing;
+}
+
 
   .person:hover {
     transform: scale(1.02)
@@ -585,7 +638,8 @@ body {
 .personal-details1 {
   position: relative;
   background-color: #272727;
-  bottom: 12px;
+  /*bottom: -172px;*/
+  top: 192px;
   height: 100%;
   padding: 5px;
   transition: 0.2s all ease-out;
@@ -595,7 +649,8 @@ body {
 .personal-details2 {
   position: relative;
   background-color: #272727;
-  bottom: 36px;
+  /*bottom: 32px;*/
+  top: 170px;
   height: 100%;
   padding: 5px;
   transition: 0.2s all ease-out;
@@ -604,7 +659,8 @@ body {
 
   .person:hover>.personal-details1,
   .person:hover>.personal-details2 {
-    bottom: 188px;
+    top: 125px;
+    
   }
 
   .personal-details1 a,
@@ -617,8 +673,9 @@ body {
     margin: 0;
     color: var(--darkgray);
     transition: 0.1s all;
-    font-size: 16px;
-
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
     .personal-details1 h6:hover,
@@ -841,7 +898,12 @@ body {
     cursor: pointer;
     letter-spacing: 2px;
     text-transform: uppercase;
+    transition: 0.05s all;
   }
+
+    .switchpage-active:hover {
+      color: var(--lightgray);
+    }
 
   .switchpage-inactive {
     color: #555;
