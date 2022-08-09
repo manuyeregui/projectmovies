@@ -240,14 +240,14 @@ body {
   display: none;
 }
 
-.loading-movie {
+/*.loading-movie {
   margin: 0 5px;
   background-color: #101010;
   min-width: 200px;
   height: 300px;
   border-radius: 5px;
-  animation: loading 0.5s infinite;
-}
+  animation: 0.5s infinite;
+}*/
 
 .movies-box {
   overflow: hidden;
@@ -522,6 +522,7 @@ body {
   z-index: 10;
   border-left: 1px solid var(--lightgray);
   max-width: 709px;
+  background: #171717;
 }
 
 .moviepage-poster {
@@ -618,6 +619,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   cursor: grab;
+  position: relative;
 }
 
 .person:active {
@@ -629,46 +631,39 @@ body {
     transform: scale(1.02)
   }
 
+  .person:hover>.personal-details p {
+    height: 40px;
+    margin: 5px 0;
+  }
+
 .person img {
   width: 150px;
   min-height: 225px;
 }
 
-.personal-details1 {
-  position: relative;
+.personal-details {
+  position: absolute;
   background-color: #272727;
-  /*bottom: -172px;*/
-  top: 192px;
-  height: 100%;
   padding: 5px;
-  transition: 0.2s all ease-out;
+  width: 140px;
   max-width: 140px;
+  /*top: 192px;*/
+  bottom: 0;
+  transition: 0.2s all ease;
 }
 
-.personal-details2 {
-  position: relative;
-  background-color: #272727;
-  /*bottom: 32px;*/
-  top: 170px;
-  height: 100%;
-  padding: 5px;
-  transition: 0.2s all ease-out;
-  max-width: 140px;
-}
-
-  .person:hover>.personal-details1,
+  /*.person:hover>.personal-details1,
   .person:hover>.personal-details2 {
-    top: 125px;
+    top: auto;
+    bottom: 0;
     
-  }
+  }*/
 
-  .personal-details1 a,
-  .personal-details2 a {
+  .personal-details a {
     text-decoration: none;
   }
 
-  .personal-details1 h6,
-  .personal-details2 h6 {
+  .personal-details h6 {
     margin: 0;
     color: var(--darkgray);
     transition: 0.1s all;
@@ -677,17 +672,26 @@ body {
     letter-spacing: 2px;
   }
 
-    .personal-details1 h6:hover,
-    .personal-details2 h6:hover {
+    .personal-details h6:hover {
       color: #777;
     }
 
-  .personal-details1 p,
-  .personal-details2 p {
-    margin: 5px 0;
+  .personal-details p{
+    margin: 0;
     color: var(--darkgray);
     font-size: 14px;
     font-style: italic;
+    height: 0;
+    overflow: hidden;
+    transition: 0.2s all ease;
+  }
+
+.loading-movie {
+  position: absolute;
+  filter: blur(5px);
+}
+  .loaded {
+    display: none;
   }
 
 /*        Footer        */
@@ -842,6 +846,10 @@ body {
   flex-wrap: wrap;
 }
 
+  .movies-grid a {
+    text-decoration: none;
+  }
+
   .movies-grid img {
     width: 160px;
     border-radius: 5px;
@@ -856,7 +864,6 @@ body {
     margin: 5px;
     background: #363636;
     color: var(--darkgray);
-    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;

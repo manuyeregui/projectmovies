@@ -73,7 +73,7 @@ function SearchBar() {
                                 alt='' 
                                 src={
                                   m.profile_path !== null
-                                    ? "https://image.tmdb.org/t/p/original" + m.profile_path
+                                    ? "https://image.tmdb.org/t/p/w185" + m.profile_path
                                     : avatar
                                 }
                               />
@@ -99,7 +99,7 @@ function SearchBar() {
                                 alt='' 
                                 src={
                                       m.poster_path !== undefined
-                                        ? "https://image.tmdb.org/t/p/original" + m.poster_path
+                                        ? "https://image.tmdb.org/t/p/w92" + m.poster_path
                                         : avatar
                                 }
                               />

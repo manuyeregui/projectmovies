@@ -47,13 +47,22 @@ function Moviepage() {
         
             <div>
                         
-                        {/*<img className='backdrop-img' src={"https://image.tmdb.org/t/p/original/" + movie.backdrop_path} alt='backdrop'/>*/}
-                        <img
-                            onLoad={changeLoading}
-                            src={isLoading ? "https://image.tmdb.org/t/p/w300/" + movie.backdrop_path : "https://image.tmdb.org/t/p/original/" + movie.backdrop_path}
-                            className={isLoading ? 'backdrop-img loading-blur' : 'backdrop-img'}
-                            alt="Movie Poster"
-                        />
+                        {movie.backdrop_path &&
+                            <div>
+                                <img
+                                    src={"https://image.tmdb.org/t/p/w300/" + movie.backdrop_path}
+                                    className={isLoading ? 'loading-movie backdrop-img' : 'loading-movie loaded backdrop-img'}
+                                    alt="Movie Backdrop"
+                                />
+                                <img
+                                    onLoad={changeLoading}
+                                    src={"https://image.tmdb.org/t/p/original/" + movie.backdrop_path}
+                                    className='backdrop-img'
+                                    alt="Movie Backdrop"
+                                    loading='lazy'
+                                />
+                            </div>
+                        }
                         
                         <div className='moviepage-body-box'>
 
