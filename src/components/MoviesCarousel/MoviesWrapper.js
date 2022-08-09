@@ -40,6 +40,7 @@ function MoviesWrapper(props) {
         initial={{ opacity: 0, x: 200 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x:-200, transition: {duration: 0.2} }} 
+        className='section-title'
       >
         {props.title}
       </motion.h2>

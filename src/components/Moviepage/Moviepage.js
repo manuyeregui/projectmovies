@@ -27,12 +27,13 @@ function Moviepage() {
 
     const recommendedMovies = 'https://api.themoviedb.org/3/movie/' + id + '/recommendations?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'
 
-
+    
 
     const [isLoading, setIsLoading] = useState(true);
 
     const changeLoading = () => {
-        setIsLoading(false)
+        setTimeout(() => {setIsLoading(false)}, 200)
+        
     }
 
 
@@ -64,7 +65,7 @@ function Moviepage() {
                             </div>
                         }
                         
-                        <div className='moviepage-body-box'>
+                        <div className='moviepage-body-box' style={!movie.backdrop_path ? {margin: '30px 0 0 0'} : null}>
 
                             <LeftColumnWrapper
                                 backdrop={movie.backdrop_path ? true : false}

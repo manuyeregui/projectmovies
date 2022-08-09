@@ -22,12 +22,13 @@ export default function Movie(props) {
         <div className='hidden-text-box'>
           <div>
             <h2 className="movie-title">{props.title}</h2>
-            { props.showRating &&
+            {props.showRating &&
               (props.rating !== null && <div className='movie-rating'><span className="material-symbols-rounded">star</span>{props.rating.toFixed(1)}</div>)
             }
           </div>
           <Link className="movie-button" to={'/movies/' + props.id}>DETAILS</Link>
         </div>
+        <Link className='mobile-movie-button' to={'/movies/' + props.id}/>
     </motion.div>
   )
 }
