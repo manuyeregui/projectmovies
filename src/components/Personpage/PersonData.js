@@ -34,7 +34,7 @@ function PersonData() {
     }
 
     return (
-        <div>
+        <div className='personpage-left-column'>
             {(personData.profile_path !== null && personData.profile_path !== undefined) &&
                 <Tilt style={{background: 'transparent', boxShadow: 'none'}} options={{}}>
                     {<img loading='lazy' src={'https://image.tmdb.org/t/p/original/' + personData.profile_path} alt=''/>}

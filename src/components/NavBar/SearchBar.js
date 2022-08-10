@@ -119,40 +119,6 @@ function SearchBar() {
                             </div>
                           }
                           
-                            {/*<img 
-                              alt='' 
-                              src={
-                                    m.profile_path !== undefined
-                                      ? (m.profile_path !== null && ("https://image.tmdb.org/t/p/original" + m.profile_path))
-                                      : (m.poster_path !== null && ("https://image.tmdb.org/t/p/original" + m.poster_path))
-                                  }
-                            />
-                          
-                            <div>
-                              <h4>{m.name !== undefined ? m.name : m.title}</h4>
-                              <p>
-                                {
-                                  m.known_for_department !== undefined
-                                    ? m.known_for_department
-                                    : (m.release_date && m.release_date.substring(0, 4))
-                                }
-                              </p>
-                              
-                              {m.known_for !== undefined ?
-
-                                  <p>
-                                    {m.known_for
-                                      .filter(mov => mov.title !== undefined)
-                                      .map(mov => (m.known_for.filter(mov => mov.title !== undefined).indexOf(mov) + 1) === m.known_for.filter(mov => mov.title !== undefined).length ? mov.title : mov.title + ', ')}
-                                  </p>
-
-                                  :
-
-                                  (m.vote_average > 0 &&
-                                    <p className='movie-rating'><span className='material-symbols-rounded'>star</span>{m.vote_average}</p>)
-                              }
-                              
-                            </div>*/}
                         </div>
                       </Link>
                         

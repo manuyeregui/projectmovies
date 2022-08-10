@@ -86,7 +86,7 @@ function PersonMovies() {
     }
 
     return (
-        <div className='personpage-movies-box'>
+        <div className='personpage-right-column'>
 
             <div className='job-titles'>
                 <Link
@@ -111,14 +111,23 @@ function PersonMovies() {
             
             <div className='pages'>
                 {activePage > 0 ? <p onClick={PreviousPage} className='switchpage-active'>Back</p> : <p className='switchpage-inactive'>Back</p>}
-                <div>{pagesArray.map(p => p === activePage ? <p className='pagenumber-inactive' key={p}>{p + 1}</p> :<p className='pagenumber-active' key={p}>{p + 1}</p>)}</div>
+                <div>
+                    {pagesArray
+                        .slice((activePage <= 4 ? 0 : (activePage >= pages - 4 ? (pages - 9 >= 0 ? pages - 9 : 0) : activePage - 4)), (activePage <= 4 ? 9 : activePage + 5))
+                        .map(
+                            p => p === activePage
+                                ? <p className='pagenumber-active' key={p}>{p + 1}</p>
+                                : <p className='pagenumber-inactive' key={p}>{p + 1}</p>)
+                    }
+                    {/*(activePage < pages - 6) ? <p className='pagenumber-inactive'>...{pages}</p> : (activePage === pages - 6 && <p className='pagenumber-inactive'>{pages}</p>)*/}
+                </div>
                 {activePage < (pages - 1) ? <p onClick={NextPage} className='switchpage-active'>Next</p> : <p className='switchpage-inactive'>Next</p>}
             </div>
 
             <div className='movies-grid'>
                 {Pagination(moviesFilter, 16, activePage)
                     .map(movie => 
-                        <MovieInGrid id={movie.id} poster_path={movie.poster_path} title={movie.title}/>
+                        <MovieInGrid id={movie.id} poster_path={movie.poster_path} title={movie.title} key={movie.id}/>
                 )}
 
             </div>

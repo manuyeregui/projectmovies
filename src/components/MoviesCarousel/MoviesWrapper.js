@@ -26,7 +26,9 @@ function MoviesWrapper(props) {
     }, [])
 
     useEffect(() => {
-      setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 10)
+      setTimeout(() => {
+        setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 10)
+       }, 200)
     }, [movies])
 
     const loadingMovies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -34,7 +36,7 @@ function MoviesWrapper(props) {
     
 
   return (
-    <div className={(loading === false && movies.length != 0) ? 'section-wrapper' : 'display-none'}>
+    <div className={(loading === false && movies.length !== 0) ? 'section-wrapper' : 'display-none'}>
 
       <motion.h2 
         initial={{ opacity: 0, x: 200 }}

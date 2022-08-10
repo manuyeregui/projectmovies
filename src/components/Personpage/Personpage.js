@@ -15,12 +15,12 @@ function Personpage() {
         >
             <div className='personpage-box'>
                 <div className='personal-data-box'>
-                    <div className='personpage-left-column'>
+                    
                         <PersonData/>
-                    </div>
-                    <div className='personpage-right-column'>
+                    
+
                         <PersonMovies/>
-                    </div>
+
                 </div>
             </div>
         </motion.div>
