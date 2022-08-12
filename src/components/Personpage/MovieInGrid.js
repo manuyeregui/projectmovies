@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import Tilt from 'react-vanilla-tilt';
 import { motion } from 'framer-motion';
@@ -8,8 +8,16 @@ function MovieInGrid(props) {
     const [isLoading, setIsLoading] = useState(true)
 
     const changeLoading = () => {
-        setTimeout(setIsLoading(false), 2000)
-        
+        setIsLoading(false)
+    }
+
+    const image = useRef();
+
+    const handleError = () => {
+        console.log('error');
+        setTimeout(() => {
+            image.current.src = 'https://image.tmdb.org/t/p/w500' + props.poster_path
+        }, 100)
     }
 
     return (
@@ -21,7 +29,7 @@ function MovieInGrid(props) {
                     <div>
                         <motion.img 
                             initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            animate={{ opacity: 1, x: 0, transition: {duration: 0.2} }}
                             exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
                             key={'loading' + props.id}
                             src={'https://image.tmdb.org/t/p/w92' + props.poster_path}
@@ -29,11 +37,13 @@ function MovieInGrid(props) {
                         />
                         <motion.img 
                             initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            animate={{ opacity: 1, x: 0, transition: {duration: 0.2} } }
                             exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
                             key={props.id}
                             src={'https://image.tmdb.org/t/p/w500' + props.poster_path}
+                            ref={image}
                             onLoad={changeLoading}
+                            onError={handleError}
                         />
                     </div>
                 :

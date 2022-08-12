@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {motion} from 'framer-motion';
 import {Link} from 'react-router-dom';
 import avatar from '../../assets/default-avatar.jpg'
@@ -11,10 +11,21 @@ export default function Movie(props) {
     setIsLoading(false)
   }
 
+  const image = useRef();
+
+  const handleError = () => {
+    console.log('error');
+    setTimeout(() => {
+        image.current.src = 'https://image.tmdb.org/t/p/w500' + props.poster_path
+    }, 100)
+  }
+
   return (
     <motion.div className='movie'>
         <img
           onLoad={changeLoading}
+          onError={handleError}
+          ref={image}
           loading='lazy'
           src={isLoading ? "https://image.tmdb.org/t/p/w92/" + props.poster_path : "https://image.tmdb.org/t/p/original/" + props.poster_path}
           className={isLoading ? 'poster-img loading-blur' : 'poster-img'} alt="Movie Poster"

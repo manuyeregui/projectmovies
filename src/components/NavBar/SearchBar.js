@@ -98,7 +98,7 @@ function SearchBar() {
                               <img 
                                 alt='' 
                                 src={
-                                      m.poster_path !== undefined
+                                      m.poster_path !== null
                                         ? "https://image.tmdb.org/t/p/w92" + m.poster_path
                                         : avatar
                                 }

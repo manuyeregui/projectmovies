@@ -5,8 +5,12 @@ import avatar from '../../assets/default-avatar.jpg'
 
 export default function Movie(props) {
 
+  const handleError = () => {
+    console.log('error');
+  }
+
   return (
-    <motion.div className='person' style={props.personal_img === 'https://image.tmdb.org/t/p/w185/null' ? {backgroundImage: `url(${avatar})`} : {backgroundImage: `url(${props.personal_img})`}}>
+    <motion.div onError={handleError} className='person' style={props.personal_img === 'https://image.tmdb.org/t/p/w185/null' ? {backgroundImage: `url(${avatar})`} : {backgroundImage: `url(${props.personal_img})`}}>
 
       <div className='personal-details'>
         <Link to={props.actor === true ? ('/person/' + props.id + '/actor') : '/person/' + props.id + '/' + props.detail.toLowerCase().split(' ').join('')}>

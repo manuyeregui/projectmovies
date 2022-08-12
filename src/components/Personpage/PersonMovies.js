@@ -89,6 +89,7 @@ function PersonMovies() {
         <div className='personpage-right-column'>
 
             <div className='job-titles'>
+
                 <Link
                     to={'/person/' + id + '/all'}
                     className={job === 'all' ? 'job-selected all-selected' : 'job-not-selected all-not-selected'}
