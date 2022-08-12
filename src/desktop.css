@@ -3,7 +3,8 @@
     /*        NAVBAR        */
     
     .nav-box {
-      position: absolute;
+      /*position: absolute;*/
+      position: fixed;
       top: 0;
       width: 100%;
       background-color: transparent
@@ -59,6 +60,7 @@
       aspect-ratio: 2453 / 1380;
       position: relative;
       justify-content: center;
+      overflow: hidden;
     }
     
       .full-screen-img {
@@ -74,12 +76,16 @@
         justify-content: center;
         height: 100%;
         width: 100%;
+        z-index: 10;
       }
         .fullscreen-content-box {
           width: 100%;
           max-width: 1000px;
           display: flex;
           justify-content: end;
+          height: 100%;
+          padding-bottom: 150px;
+          align-items: flex-end;
         }
     
         .inner-fullscreen-content-box {
@@ -96,6 +102,8 @@
           color: var(--lightgray);
           cursor: pointer;
           transition: all 0.1s ease;
+          user-select: none;
+          margin: 10px 0;
         }
         
           .switchmovie-active:hover {
@@ -103,8 +111,10 @@
           }
 
         .switchmovie-inactive {
-          color: #555;
+          opacity: 0;
           pointer-events: none;
+          user-select: none;
+          margin: 10px 0;
         }
     
         /*.movie-logo-img {
@@ -119,12 +129,23 @@
     
         .homepage-fullscreen-box h2 {
           color: var(--lightgray);
-          font-size: 50px;
-          line-height: 50px;
+          font-size: 2.5vw;
+          line-height: 2.5vw;
+          letter-spacing: 2px;
+          /*font-size: 50px;
+          line-height: 50px;*/
           margin: 0;
           text-transform: uppercase;
           overflow: visible;
           hyphens: auto;
+        }
+        
+        .homepage-fullscreen-box h3 {
+          margin: 0;
+          color: #efefef;
+          text-transform: uppercase;
+          font-size: 1vw;
+          letter-spacing: 2px;
         }
     
         .homepage-fullscreen-box h6 {
@@ -159,7 +180,7 @@
           font-weight: 600;
           text-shadow: none;
           overflow: hidden;
-          margin-top: 10px;
+          margin: 10px 0
         }
     
           .details-button:hover {
