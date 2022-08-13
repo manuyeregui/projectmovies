@@ -65,6 +65,7 @@
     
       .full-screen-img {
         width: 100%;
+        position: absolute;
       }
     
       .gradient {
@@ -78,15 +79,53 @@
         width: 100%;
         z-index: 10;
       }
+
         .fullscreen-content-box {
           width: 100%;
           max-width: 1000px;
           display: flex;
-          justify-content: end;
+          justify-content: space-between;
           height: 100%;
           padding-bottom: 150px;
           align-items: flex-end;
+          position: relative;
         }
+
+        .posters-box {
+          display: flex;
+          align-items: center;
+          width: 12vw;
+          aspect-ratio: 9 / 16;
+        }
+
+        .fullscreen-poster,
+        .fullscreen-poster2,
+        .fullscreen-poster3 {
+          box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+          border-radius: 5px;
+        }
+
+          .fullscreen-poster {
+            width: 12vw;
+            z-index: 3;
+            position: absolute;
+          }
+
+          .fullscreen-poster2 {
+            width: 10vw;
+            position: absolute;
+            left: 6vw;
+            z-index: 2;
+            filter: brightness(0.9);
+          }
+
+          .fullscreen-poster3 {
+            width: 8vw;
+            position: absolute;
+            left: 10vw;
+            z-index: 1;
+            filter: brightness(0.8);
+          }
     
         .inner-fullscreen-content-box {
           width: 40%;
@@ -111,7 +150,8 @@
           }
 
         .switchmovie-inactive {
-          opacity: 0;
+          color: var(--lightgray);
+          opacity: 0.1;
           pointer-events: none;
           user-select: none;
           margin: 10px 0;
@@ -163,13 +203,21 @@
           pointer-events: none;
           text-transform: lowercase;
         }
+
+          @media (max-width: 1000px) {
+
+            .homepage-fullscreen-box p {
+              display: none;
+            }
+
+          }
     
         .details-button {
           color: var(--lightgray);
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: 15px;
+          font-size: 0.8vw;
           background: transparent;
           padding: 5px;
           border: 2px solid var(--lightgray);
@@ -180,7 +228,8 @@
           font-weight: 600;
           text-shadow: none;
           overflow: hidden;
-          margin: 10px 0
+          margin: 10px 0;
+          text-transform: uppercase;
         }
     
           .details-button:hover {

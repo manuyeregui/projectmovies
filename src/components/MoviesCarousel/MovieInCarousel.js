@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import {motion} from 'framer-motion';
 import {Link} from 'react-router-dom';
-import avatar from '../../assets/default-avatar.jpg'
 
 export default function Movie(props) {
 

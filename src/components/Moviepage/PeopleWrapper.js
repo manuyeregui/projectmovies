@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useParams } from 'react-router-dom';
 import Person from './Person'
 
 function PeopleWrapper(props) {
@@ -14,7 +13,7 @@ function PeopleWrapper(props) {
         let data = await rawData.json();
 
         const castData = await data.cast
-            .filter(d => ( d.character != ''));
+            .filter(d => ( d.character !== ''));
 
         const crewData = await data.crew.filter(d =>
             d.department === 'Directing' ||
@@ -50,7 +49,7 @@ function PeopleWrapper(props) {
     return (
         <div>
             <motion.div className='people-box' ref={castCarousel}>
-                {cast.length != 0 ?<h2 className='moviepage-detail-title'>CAST</h2> : <h2 className='moviepage-detail-title'>No Cast data yet...</h2>}
+                {cast.length !== 0 ?<h2 className='moviepage-detail-title'>CAST</h2> : <h2 className='moviepage-detail-title'>No Cast data yet...</h2>}
                 <motion.div className='inner-people-box' drag="x" dragConstraints={{right: 0, left: -castCarouselWidth}}>
                     {cast.map (m => <Person id={m.id} name={m.name} detail={m.character ? m.character : m.job} actor={m.character ? true : false} personal_img={"https://image.tmdb.org/t/p/w185/" + m.profile_path} key={'cast' + m.character + m.id}/>)}
                 </motion.div>

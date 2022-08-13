@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 function FullScreenMovies(props) {
@@ -8,6 +8,7 @@ function FullScreenMovies(props) {
     const [loadingMovie, setLoadingMovie] = useState(true);
 
     const [index, setIndex] = useState(0);
+    const [lastBtnPressed, setLastBtnPressed] = useState(null)
 
     /*const [movie, setMovie] = useState(null);*/
 
@@ -24,80 +25,107 @@ function FullScreenMovies(props) {
         getMoviesList()
     }, [])
 
-    /*useEffect(() => {
-        console.log(movie);
-        setMovie(moviesList[index]);
-        
-        console.log(movie);
-    }, []);*/
-
-    const nextIndex = () => {
+    const indexForward = () => {
+        setIsBackdropLoaded(false)
+        setLastBtnPressed('next')
         setIndex(index + 1)
-        /*setMovie(moviesList[index])*/
-        console.log(index);
+
     }
 
-    const previousIndex = () => {
+    const indexBack = () => {
+        setIsBackdropLoaded(false)
+        setLastBtnPressed('back')
         setIndex(index - 1)
-        /*setMovie(moviesList[index])*/
-        console.log(index);
+
     }
-
-    const [showOverview, setShowOverview] = useState(true);
-
-    const content = useRef();
-
-    useEffect(() => {
-        setTimeout(() => {
-            content.current.clientWidth < 1000 && setShowOverview(false)
-        }, 100);
-        
-    }, [])
 
     const [isBackdropLoaded, setIsBackdropLoaded] = useState(false);
 
     const changeLoading = () => {
-        setTimeout(() => {setIsBackdropLoaded(true)}, 100)
+        setIsBackdropLoaded(true)
         
     }
+
+    /*const posterAnims = {
+        Second_to_First_initial: { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' },
+        Second_to_First_animate: { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' },
+        Out_to_First_initial: { y: -100, opacity: 0 },
+        Out_to_First_animate: { y: 0, opacity: 1 },
+        First_to_Out_exit: { opacity: 0, y: -100, zIndex: 4, transition: {duration: 0.1} },
+        First_to_Out_transition: {duration: 0.2, delay: 0.2},
+        Out_to_First_transition: {duration: 0.2, delay: 0.1}
+
+
+    }*/
 
     return (
         !loadingMovie &&
         <div className='homepage-fullscreen-box'>
+            <AnimatePresence>
 
-            <motion.img
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0, transition: {duration: 0.2} }}
-                exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
-                key={moviesList[index].backdrop_path}
-                className={!isBackdropLoaded ? 'full-screen-img loading-movie' : 'full-screen-img loading-movie loaded'}
-                src={'https://image.tmdb.org/t/p/w300/' + moviesList[index].backdrop_path}
-            />
+                <motion.img
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0, transition: {duration: 0.1, delay: 0.2} }}
+                    exit={{ opacity: 0, transition: {duration: 0.05} }}
+                    key={moviesList[index].backdrop_path}
+                    className={!isBackdropLoaded ? 'full-screen-img loading-movie' : 'full-screen-img loading-movie loaded'}
+                    src={'https://image.tmdb.org/t/p/w300/' + moviesList[index].backdrop_path}
+                />
 
-            <motion.img
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0, transition: {duration: 0.2} }}
-                exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
-                key={'loading' + moviesList[index].backdrop_path}
-                className='full-screen-img'
-                loading='lazy'
-                src={'https://image.tmdb.org/t/p/original/' + moviesList[index].backdrop_path}
-                onLoad={changeLoading}
-            />
+                <motion.img
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0, transition: {duration: 0.1, delay: 0.2} }}
+                    exit={{ opacity: 0, transition: {duration: 0.05} }}
+                    key={'loading' + moviesList[index].backdrop_path}
+                    className='full-screen-img'
+                    loading='lazy'
+                    src={'https://image.tmdb.org/t/p/original/' + moviesList[index].backdrop_path}
+                    onLoad={changeLoading}
+                />
+
+            </AnimatePresence>
             
             <div className='gradient'>
-                <div className='fullscreen-content-box' ref={content}>
-                    <div className='inner-fullscreen-content-box'>
+                <div className='fullscreen-content-box'>
 
-                        {moviesList[index].tagline &&
-                        <motion.h6
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0, transition: {duration: 0.2, delay: 0.4} }}
-                            exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
-                            key={moviesList[index].tagline}
-                        >
-                            {moviesList[index].tagline}
-                        </motion.h6>}
+                    <div className='posters-box'>
+                        <AnimatePresence>
+                            <motion.img
+                                initial={lastBtnPressed === 'next' ? { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' } : { /*y: -100,*/ opacity: 0 }}
+                                animate={lastBtnPressed === 'next' ? { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' } : { /*y: 0,*/ opacity: 1 }}
+                                exit={lastBtnPressed === 'next' ? { opacity: 0/*, y: -100*/, zIndex: 4, transition: {duration: 0.1} } : null}
+                                transition={lastBtnPressed === 'next' ? {duration: 0.2, delay: 0.1} : {duration: 0.2, delay: 0.2}}
+                                key={moviesList[index].poster_path + '-first'}
+                                src={'https://image.tmdb.org/t/p/original/' + moviesList[index].poster_path}
+                                className='fullscreen-poster'
+                            />
+
+                            {moviesList[index + 1] &&
+                                <motion.img
+                                    initial={lastBtnPressed === 'next' ? { width: '8vw', left: '10vw', opacity: 0.5, filter: 'brightness(0.8)' } : { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' }}
+                                    animate={{ width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' }}
+                                    transition={{duration: 0.2, delay: 0.15}}
+                                    key={moviesList[index + 1].poster_path + '-second'}
+                                    src={'https://image.tmdb.org/t/p/original/' + moviesList[index + 1].poster_path}
+                                    className='fullscreen-poster2'
+                                />
+                            }
+
+                            {moviesList[index + 2] &&
+                                <motion.img
+                                    initial={lastBtnPressed === 'next' ? { opacity: 0/*, x: 100*/ } : { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' }}
+                                    animate={lastBtnPressed === 'next' ? { opacity: 0.5/*, x: 0*/ } : { width: '8vw', left: '10vw', opacity: 0.5, filter: 'brightness(0.8)' }}
+                                    transition={lastBtnPressed === 'next' ? {duration: 0.2, delay: 0.2} : {duration: 0.2, delay: 0.1}}
+                                    exit={lastBtnPressed === 'back' && { opacity: 0/*, x: 100*/, transition: {duration: 0.1} }}
+                                    key={moviesList[index + 2].poster_path + '-third'}
+                                    src={'https://image.tmdb.org/t/p/original/' + moviesList[index + 2].poster_path}
+                                    className='fullscreen-poster3'
+                                />
+                            }
+                        </AnimatePresence>
+                    </div>
+
+                    <div className='inner-fullscreen-content-box'>
 
                         <motion.div
                             initial={{ opacity: 0, x: 100 }}
@@ -129,28 +157,28 @@ function FullScreenMovies(props) {
                             initial={{ opacity: 0, x: 100 }}
                             animate={{ opacity: 1, x: 0, transition: {duration: 0.2, delay: 0.1} }}
                             exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
-                            className={showOverview ? null : 'display-none'}
                             key={moviesList[index].overview}
                         >
                             {moviesList[index].overview}
                         </motion.p>
 
-                        <h3>{props.title}</h3>
+                        <h3 key={moviesList[index].id} style={{color: props.titleColor}}>{props.title}</h3>
 
                         <div>
                             <span
-                                onClick={previousIndex}
+                                onClick={indexBack}
                                 className={index === 0 ? "material-symbols-rounded switchmovie-inactive" : "material-symbols-rounded switchmovie-active"}
                             >
                                 arrow_back_ios
                             </span>
                             <span
-                                onClick={nextIndex}
+                                onClick={indexForward}
                                 className={index + 1 === moviesList.length ? "material-symbols-rounded switchmovie-inactive" : "material-symbols-rounded switchmovie-active"}
                             >
                                 arrow_forward_ios
                             </span>
                         </div>
+
                     </div>
                 </div>
             </div>
