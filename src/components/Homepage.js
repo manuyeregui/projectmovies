@@ -10,7 +10,7 @@ function Homepage() {
       <FullScreenMovies title='Popular right now.' titleColor='#ffff98' api={'https://api.themoviedb.org/3/movie/popular?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
       <FullScreenMovies title='Upcoming.' titleColor='#ff8989' api={'https://api.themoviedb.org/3/movie/upcoming?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
       <FullScreenMovies title='Today trending.' titleColor='#898dff' api={'https://api.themoviedb.org/3/trending/movie/day?api_key=' + process.env.REACT_APP_TMDB_KEY}/>
-      <FullScreenMovies title='Top rated.' titleColor='#ffb37d' api={'https://api.themoviedb.org/3/movie/top_rated?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
+      <FullScreenMovies title='Top rated.' titleColor='#ffb37d' showRating={true} api={'https://api.themoviedb.org/3/movie/top_rated?api_key=' + process.env.REACT_APP_TMDB_KEY + '&language=en-US&page=1'}/>
       
       <motion.div id="wrapper"
       initial={{ opacity: 0, x: 100 }}

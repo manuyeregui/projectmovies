@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -28,14 +28,20 @@ function FullScreenMovies(props) {
     const indexForward = () => {
         setIsBackdropLoaded(false)
         setLastBtnPressed('next')
-        setIndex(index + 1)
 
+        setTimeout(() => {
+            setIndex(index + 1)
+        }, 50)
+        
     }
 
     const indexBack = () => {
         setIsBackdropLoaded(false)
         setLastBtnPressed('back')
-        setIndex(index - 1)
+
+        setTimeout(() => {
+            setIndex(index - 1)
+        }, 50)
 
     }
 
@@ -43,7 +49,6 @@ function FullScreenMovies(props) {
 
     const changeLoading = () => {
         setIsBackdropLoaded(true)
-        
     }
 
     /*const posterAnims = {
@@ -64,9 +69,9 @@ function FullScreenMovies(props) {
             <AnimatePresence>
 
                 <motion.img
-                    initial={{ opacity: 0, x: 100 }}
+                    initial={lastBtnPressed === 'next' ? { opacity: 0, x: 100 } : { opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0, transition: {duration: 0.1, delay: 0.2} }}
-                    exit={{ opacity: 0, transition: {duration: 0.05} }}
+                    exit={lastBtnPressed === 'next' ? { opacity: 0, x: -100, transition: {duration: 0.1} } : { opacity: 0, x: 100, transition: {duration: 0.1} }}
                     key={moviesList[index].backdrop_path}
                     className={!isBackdropLoaded ? 'full-screen-img loading-movie' : 'full-screen-img loading-movie loaded'}
                     src={'https://image.tmdb.org/t/p/w300/' + moviesList[index].backdrop_path}
@@ -75,7 +80,7 @@ function FullScreenMovies(props) {
                 <motion.img
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0, transition: {duration: 0.1, delay: 0.2} }}
-                    exit={{ opacity: 0, transition: {duration: 0.05} }}
+                    exit={{ opacity: 0, x: -100, transition: {duration: 0.05} }}
                     key={'loading' + moviesList[index].backdrop_path}
                     className='full-screen-img'
                     loading='lazy'
@@ -91,9 +96,9 @@ function FullScreenMovies(props) {
                     <div className='posters-box'>
                         <AnimatePresence>
                             <motion.img
-                                initial={lastBtnPressed === 'next' ? { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' } : { /*y: -100,*/ opacity: 0 }}
-                                animate={lastBtnPressed === 'next' ? { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' } : { /*y: 0,*/ opacity: 1 }}
-                                exit={lastBtnPressed === 'next' ? { opacity: 0/*, y: -100*/, zIndex: 4, transition: {duration: 0.1} } : null}
+                                initial={lastBtnPressed === 'next' ? { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.85)' } : { y: -100, opacity: 0 }}
+                                animate={lastBtnPressed === 'next' ? { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' } : { y: 0, opacity: 1 }}
+                                exit={lastBtnPressed === 'next' ? { opacity: 0, y: -100, zIndex: 4, transition: {duration: 0.1} } : null}
                                 transition={lastBtnPressed === 'next' ? {duration: 0.2, delay: 0.1} : {duration: 0.2, delay: 0.2}}
                                 key={moviesList[index].poster_path + '-first'}
                                 src={'https://image.tmdb.org/t/p/original/' + moviesList[index].poster_path}
@@ -102,8 +107,8 @@ function FullScreenMovies(props) {
 
                             {moviesList[index + 1] &&
                                 <motion.img
-                                    initial={lastBtnPressed === 'next' ? { width: '8vw', left: '10vw', opacity: 0.5, filter: 'brightness(0.8)' } : { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' }}
-                                    animate={{ width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' }}
+                                    initial={lastBtnPressed === 'next' ? { width: '8vw', left: '10vw', opacity: 0.6, filter: 'brightness(0.7)' } : { width: '12vw', left: 0 , opacity: 1, filter: 'brightness(1)' }}
+                                    animate={{ width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.85)' }}
                                     transition={{duration: 0.2, delay: 0.15}}
                                     key={moviesList[index + 1].poster_path + '-second'}
                                     src={'https://image.tmdb.org/t/p/original/' + moviesList[index + 1].poster_path}
@@ -113,10 +118,10 @@ function FullScreenMovies(props) {
 
                             {moviesList[index + 2] &&
                                 <motion.img
-                                    initial={lastBtnPressed === 'next' ? { opacity: 0/*, x: 100*/ } : { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.9)' }}
-                                    animate={lastBtnPressed === 'next' ? { opacity: 0.5/*, x: 0*/ } : { width: '8vw', left: '10vw', opacity: 0.5, filter: 'brightness(0.8)' }}
+                                    initial={lastBtnPressed === 'next' ? { opacity: 0, x: 100 } : { width: '10vw', left: '6vw', opacity: 0.8, filter: 'brightness(0.85)' }}
+                                    animate={lastBtnPressed === 'next' ? { opacity: 0.6, x: 0 } : { width: '8vw', left: '10vw', opacity: 0.6, filter: 'brightness(0.7)' }}
                                     transition={lastBtnPressed === 'next' ? {duration: 0.2, delay: 0.2} : {duration: 0.2, delay: 0.1}}
-                                    exit={lastBtnPressed === 'back' && { opacity: 0/*, x: 100*/, transition: {duration: 0.1} }}
+                                    exit={lastBtnPressed === 'back' && { opacity: 0, x: 100, transition: {duration: 0.1} }}
                                     key={moviesList[index + 2].poster_path + '-third'}
                                     src={'https://image.tmdb.org/t/p/original/' + moviesList[index + 2].poster_path}
                                     className='fullscreen-poster3'
@@ -128,9 +133,9 @@ function FullScreenMovies(props) {
                     <div className='inner-fullscreen-content-box'>
 
                         <motion.div
-                            initial={{ opacity: 0, x: 100 }}
+                            initial={lastBtnPressed === 'next' ? { opacity: 0, x: 100 } : { opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0, transition: {duration: 0.2, delay: 0.3} }}
-                            exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
+                            exit={{ opacity: 0, x:-100, transition: {duration: 0.05} }}
                             key={'/movies/' + moviesList[index].id}
                         >
                             <Link
@@ -145,22 +150,28 @@ function FullScreenMovies(props) {
                         </motion.div>
 
                         <motion.h2
-                            initial={{ opacity: 0, x: 100 }}
+                            initial={lastBtnPressed === 'next' ? { opacity: 0, x: 100 } : { opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0, transition: {duration: 0.2, delay: 0.2} }}
-                            exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
+                            exit={{ opacity: 0, x:-100, transition: {duration: 0.05} }}
                             key={moviesList[index].title}
                         >
                             {moviesList[index].title}
                         </motion.h2>
 
                         <motion.p
-                            initial={{ opacity: 0, x: 100 }}
+                            initial={lastBtnPressed === 'next' ? { opacity: 0, x: 100 } : { opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0, transition: {duration: 0.2, delay: 0.1} }}
-                            exit={{ opacity: 0, x:-100, transition: {duration: 0.2} }}
+                            exit={{ opacity: 0, x:-100, transition: {duration: 0.05} }}
                             key={moviesList[index].overview}
                         >
                             {moviesList[index].overview}
                         </motion.p>
+
+                        {/*(props.showRating && moviesList[index].vote_average) &&
+                        
+                        <div className='movie-rating-homepage'><span className="material-symbols-rounded">star</span>{moviesList[index].vote_average.toFixed(1)}</div>
+                        
+                        */}
 
                         <h3 key={moviesList[index].id} style={{color: props.titleColor}}>{props.title}</h3>
 

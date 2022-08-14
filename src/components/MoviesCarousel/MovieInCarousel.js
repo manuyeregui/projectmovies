@@ -16,7 +16,7 @@ export default function Movie(props) {
     console.log('error');
     setTimeout(() => {
         image.current.src = 'https://image.tmdb.org/t/p/w500' + props.poster_path
-    }, 100)
+    }, 50)
   }
 
   return (
