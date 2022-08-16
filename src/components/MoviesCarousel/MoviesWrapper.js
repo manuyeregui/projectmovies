@@ -36,7 +36,7 @@ function MoviesWrapper(props) {
     
 
   return (
-    <div className={(loading === false && movies.length !== 0) ? 'section-wrapper' : 'display-none'}>
+    <div className={(loading === false && movies.length !== 0) ? `section-wrapper${!props.displayOnDesktop && ' desktop-display-none'}` : 'display-none'}>
 
       <motion.h2 
         initial={{ opacity: 0, x: 200 }}
